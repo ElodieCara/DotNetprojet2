@@ -41,7 +41,7 @@ namespace P2FixAnAppDotNetCode
                 .AddDataAnnotationsLocalization();
 
             services.Configure<RequestLocalizationOptions>(opts =>
-            { 
+            {
                 var supportedCultures = new List<CultureInfo>
                 {
                     new CultureInfo("en-GB"),
@@ -60,17 +60,18 @@ namespace P2FixAnAppDotNetCode
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseStaticFiles();
             var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
             app.UseRequestLocalization(options.Value);
             app.UseSession();
-            app.UseMvc(routes =>
+            app.UseRouting(); // Utiliser le routage d'endpoints
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Product}/{action=Index}/{id?}");
+                    pattern: "{controller=Product}/{action=Index}/{id?}");
             });
         }
     }

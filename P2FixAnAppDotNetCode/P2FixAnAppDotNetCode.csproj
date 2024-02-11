@@ -1,47 +1,45 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<!-- Ajoutez la ligne suivante pour spécifier l'utilisation du framework partagé -->
+		<UseSharedCompilation>false</UseSharedCompilation>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Infrastructure\**" />
-    <Compile Remove="Models\ViewModel\**" />
-    <Compile Remove="Repository\**" />
-    <Compile Remove="Views\Home\**" />
-    <Content Remove="Infrastructure\**" />
-    <Content Remove="Models\ViewModel\**" />
-    <Content Remove="Repository\**" />
-    <Content Remove="Views\Home\**" />
-    <EmbeddedResource Remove="Infrastructure\**" />
-    <EmbeddedResource Remove="Models\ViewModel\**" />
-    <EmbeddedResource Remove="Repository\**" />
-    <EmbeddedResource Remove="Views\Home\**" />
-    <None Remove="Infrastructure\**" />
-    <None Remove="Models\ViewModel\**" />
-    <None Remove="Repository\**" />
-    <None Remove="Views\Home\**" />
-  </ItemGroup>
+	<ItemGroup>
+		<!-- Supprimez les éléments qui ne sont pas nécessaires -->
+		<Compile Remove="Infrastructure\**" />
+		<Compile Remove="Models\ViewModel\**" />
+		<Compile Remove="Repository\**" />
+		<Compile Remove="Views\Home\**" />
+		<Content Remove="Infrastructure\**" />
+		<Content Remove="Models\ViewModel\**" />
+		<Content Remove="Repository\**" />
+		<Content Remove="Views\Home\**" />
+		<EmbeddedResource Remove="Infrastructure\**" />
+		<EmbeddedResource Remove="Models\ViewModel\**" />
+		<EmbeddedResource Remove="Repository\**" />
+		<EmbeddedResource Remove="Views\Home\**" />
+		<None Remove="Infrastructure\**" />
+		<None Remove="Models\ViewModel\**" />
+		<None Remove="Repository\**" />
+		<None Remove="Views\Home\**" />
+		<!-- Supprimez cette ligne si vous ne souhaitez pas supprimer le fichier SessionCart.cs -->
+		<Compile Remove="Models\SessionCart.cs" />
+		<!-- Supprimez cette ligne si vous ne souhaitez pas supprimer le fichier Order.en.resx -->
+		<EmbeddedResource Remove="Resources\Models\Order.en.resx" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="Models\SessionCart.cs" />
-  </ItemGroup>
+	<ItemGroup>
+		<!-- Supprimez la référence à l'outil de génération de code Visual Studio Web -->
+		<DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.3" />
+		<!-- Supprimez cet élément si vous ne souhaitez pas inclure le fichier Order.en.resx -->
+		<None Include="Resources\Models\ViewModels\Order.en.resx" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Remove="Resources\Models\Order.en.resx" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Resources\Models\ViewModels\Order.en.resx" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
-    <PackageReference Include="Microsoft.Extensions.Localization" Version="2.1.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<!-- Ajoutez une référence au package Microsoft.Extensions.Localization -->
+		<PackageReference Include="Microsoft.Extensions.Localization" Version="2.1.1" />
+	</ItemGroup>
 
 </Project>
