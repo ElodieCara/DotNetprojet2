@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace P2FixAnAppDotNetCode.Models.Repositories
@@ -36,6 +37,14 @@ namespace P2FixAnAppDotNetCode.Models.Repositories
         {
             List<Product> list = _products.Where(p => p.Stock > 0).OrderBy(p => p.Name).ToList();
             return list.ToArray();
+        }
+
+        /// <summary>
+        /// Récupère un produit à partir de l'inventaire en fonction de son identifiant.
+        /// </summary>
+        public Product GetProductById(int id)
+        {
+            return _products.FirstOrDefault(p => p.Id == id);
         }
 
         /// <summary>

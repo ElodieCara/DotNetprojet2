@@ -39,7 +39,7 @@
 
 	<ItemGroup>
 		<!-- Ajoutez une référence au package Microsoft.Extensions.Localization -->
-		<PackageReference Include="Microsoft.Extensions.Localization" Version="2.1.1" />
+		<PackageReference Include="Microsoft.Extensions.Localization" Version="8.0.2" />
 	</ItemGroup>
 
 </Project>

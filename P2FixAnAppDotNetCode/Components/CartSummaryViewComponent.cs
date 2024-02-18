@@ -1,15 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using P2FixAnAppDotNetCode.Models;
+using System;
 
 namespace P2FixAnAppDotNetCode.Components
 {
     public class CartSummaryViewComponent : ViewComponent
     {
-        private readonly Cart _cart;
+        private readonly ICart _cart;
 
         public CartSummaryViewComponent(ICart cart)
         {
-            _cart = cart as Cart;
+            _cart = cart ?? throw new ArgumentNullException(nameof(cart));
         }
 
         public IViewComponentResult Invoke()

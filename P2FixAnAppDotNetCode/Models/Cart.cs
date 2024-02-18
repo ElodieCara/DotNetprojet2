@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace P2FixAnAppDotNetCode.Models
@@ -8,6 +9,13 @@ namespace P2FixAnAppDotNetCode.Models
     /// </summary>
     public class Cart : ICart
     {
+        private readonly List<CartLine> _cartLines;
+
+        public Cart()
+        {
+            _cartLines = new List<CartLine>();
+        }
+
         /// <summary>
         /// Read-only property for display only
         /// </summary>
@@ -19,7 +27,7 @@ namespace P2FixAnAppDotNetCode.Models
         /// <returns></returns>
         private List<CartLine> GetCartLineList()
         {
-            return new List<CartLine>();
+            return _cartLines;
         }
 
         /// <summary>
@@ -28,6 +36,24 @@ namespace P2FixAnAppDotNetCode.Models
         public void AddItem(Product product, int quantity)
         {
             // TODO implement the method
+            if (product == null)
+            {
+                throw new ArgumentNullException(nameof(product), "Le produit ne peut pas être null.");
+            }
+
+            // Vérifie si le produit est déjà dans le panier
+            CartLine cartLine = GetCartLineList().FirstOrDefault(cl => cl.Product.Id == product.Id);
+
+            if (cartLine != null)
+            {
+                // Si le produit est déjà dans le panier, incrémente sa quantité
+                cartLine.Quantity += quantity;
+            }
+            else
+            {
+                // Sinon, ajoute une nouvelle ligne au panier
+                GetCartLineList().Add(new CartLine { Product = product, Quantity = quantity });
+            }
         }
 
         /// <summary>
@@ -42,7 +68,13 @@ namespace P2FixAnAppDotNetCode.Models
         public double GetTotalValue()
         {
             // TODO implement the method
-            return 0.0;
+            //return 0.0;
+            double totalValue = 0.0;
+            foreach (var line in Lines)
+            {
+                totalValue += line.Product.Price * line.Quantity;
+            }
+            return totalValue;
         }
 
         /// <summary>
@@ -51,7 +83,16 @@ namespace P2FixAnAppDotNetCode.Models
         public double GetAverageValue()
         {
             // TODO implement the method
-            return 0.0;
+            //return 0.0;
+            if (!Lines.Any())
+            {
+                return 0.0;
+            }
+
+            double totalValue = GetTotalValue();
+            int totalQuantity = Lines.Sum(line => line.Quantity);
+
+            return totalValue / totalQuantity;
         }
 
         /// <summary>
@@ -59,7 +100,14 @@ namespace P2FixAnAppDotNetCode.Models
         /// </summary>
         public Product FindProductInCartLines(int productId)
         {
-            // TODO implement the method
+            foreach (var cartLine in GetCartLineList())
+            {
+                if (cartLine.Product.Id == productId)
+                {
+                    return cartLine.Product;
+                }
+            }
+            // Aucun produit correspondant n'a été trouvé
             return null;
         }
 
