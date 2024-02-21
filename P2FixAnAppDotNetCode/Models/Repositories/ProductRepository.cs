@@ -13,8 +13,11 @@ namespace P2FixAnAppDotNetCode.Models.Repositories
 
         public ProductRepository()
         {
-            _products = new List<Product>();
-            GenerateProductData();
+            if (_products == null)
+            {
+                _products = new List<Product>();
+                GenerateProductData();
+            }
         }
 
         /// <summary>
@@ -40,7 +43,7 @@ namespace P2FixAnAppDotNetCode.Models.Repositories
         }
 
         /// <summary>
-        /// Récupère un produit à partir de l'inventaire en fonction de son identifiant.
+        /// Retrieves a product from the inventory by its id.
         /// </summary>
         public Product GetProductById(int id)
         {
@@ -52,11 +55,34 @@ namespace P2FixAnAppDotNetCode.Models.Repositories
         /// </summary>
         public void UpdateProductStocks(int productId, int quantityToRemove)
         {
-            Product product = _products.First(p => p.Id == productId);
-            product.Stock = product.Stock - quantityToRemove;
+            Product product = _products.FirstOrDefault(p => p.Id == productId);
+            if (product != null)
+            {
+                product.Stock -= quantityToRemove;
 
-            if (product.Stock == 0)
-                _products.Remove(product);
+                if (product.Stock <= 0)
+                {
+                    _products.Remove(product);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Updates a product in the inventory
+        /// </summary>
+        /// <param name="updatedProduct">Product object with updated information</param>
+        public void UpdateProduct(Product updatedProduct)
+        {
+            var product = _products.FirstOrDefault(p => p.Id == updatedProduct.Id);
+            if (product != null)
+            {
+                // Update properties of the product
+                product.Name = updatedProduct.Name;
+                product.Description = updatedProduct.Description;
+                product.Price = updatedProduct.Price;
+                product.Stock = updatedProduct.Stock;
+                // Add any other properties that need to be updated
+            }
         }
     }
 }

@@ -7,5 +7,7 @@
         Product GetProductById(int id); // Ajoutez cette méthode 
 
         void UpdateProductStocks(int productId, int quantityToRemove);
+
+        void UpdateProduct(Product product); // Nouvelle méthode pour mettre à jour un produit
     }
 }

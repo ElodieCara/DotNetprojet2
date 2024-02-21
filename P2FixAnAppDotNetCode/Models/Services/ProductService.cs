@@ -3,7 +3,7 @@
 namespace P2FixAnAppDotNetCode.Models.Services
 {
     /// <summary>
-    /// This class provides services to manages the products
+    /// This class provides services to manage the products
     /// </summary>
     public class ProductService : IProductService
     {
@@ -21,31 +21,35 @@ namespace P2FixAnAppDotNetCode.Models.Services
         /// </summary>
         public Product[] GetAllProducts()
         {
-            // TODO change the return type from array to List<T> and propagate the change
-            // throughout the application
             return _productRepository.GetAllProducts();
         }
 
         /// <summary>
-        /// Get a product form the inventory by its id
+        /// Get a product from the inventory by its id
         /// </summary>
         public Product GetProductById(int id)
         {
-            // TODO implement the method
             return _productRepository.GetProductById(id);
         }
 
         /// <summary>
-        /// Update the quantities left for each product in the inventory depending of ordered the quantities
+        /// Update the quantities left for each product in the inventory depending on the ordered quantities
         /// </summary>
         public void UpdateProductQuantities(Cart cart)
         {
-            // TODO implement the method
             foreach (var line in cart.Lines)
             {
                 _productRepository.UpdateProductStocks(line.Product.Id, line.Quantity);
             }
-            // update product inventory by using _productRepository.UpdateProductStocks() method.
+        }
+
+        /// <summary>
+        /// Updates a single product in the inventory
+        /// </summary>
+        /// <param name="product">The product to update</param>
+        public void UpdateProduct(Product product)
+        {
+            _productRepository.UpdateProduct(product);
         }
     }
 }
