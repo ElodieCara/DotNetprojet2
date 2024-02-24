@@ -27,14 +27,13 @@
 		<!-- Supprimez cette ligne si vous ne souhaitez pas supprimer le fichier SessionCart.cs -->
 		<Compile Remove="Models\SessionCart.cs" />
 		<!-- Supprimez cette ligne si vous ne souhaitez pas supprimer le fichier Order.en.resx -->
-		<EmbeddedResource Remove="Resources\Models\Order.en.resx" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<!-- Supprimez la référence à l'outil de génération de code Visual Studio Web -->
 		<DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.3" />
 		<!-- Supprimez cet élément si vous ne souhaitez pas inclure le fichier Order.en.resx -->
-		<None Include="Resources\Models\ViewModels\Order.en.resx" />
+		<None Include="Resources\Models\Order.en.resx" />
 	</ItemGroup>
 
 	<ItemGroup>
