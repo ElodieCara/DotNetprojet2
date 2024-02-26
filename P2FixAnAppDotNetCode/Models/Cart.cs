@@ -35,23 +35,19 @@ namespace P2FixAnAppDotNetCode.Models
         /// </summary>//
         public void AddItem(Product product, int quantity)
         {
-            // TODO implement the method
             if (product == null)
             {
                 throw new ArgumentNullException(nameof(product), "Le produit ne peut pas être null.");
             }
 
-            // Vérifie si le produit est déjà dans le panier
             CartLine cartLine = GetCartLineList().FirstOrDefault(cl => cl.Product.Id == product.Id);
 
             if (cartLine != null)
             {
-                // Si le produit est déjà dans le panier, incrémente sa quantité
                 cartLine.Quantity += quantity;
             }
             else
             {
-                // Sinon, ajoute une nouvelle ligne au panier
                 GetCartLineList().Add(new CartLine { Product = product, Quantity = quantity });
             }
         }
@@ -67,8 +63,6 @@ namespace P2FixAnAppDotNetCode.Models
         /// </summary>
         public double GetTotalValue()
         {
-            // TODO implement the method
-            //return 0.0;
             double totalValue = 0.0;
             foreach (var line in Lines)
             {
@@ -82,8 +76,6 @@ namespace P2FixAnAppDotNetCode.Models
         /// </summary>
         public double GetAverageValue()
         {
-            // TODO implement the method
-            //return 0.0;
             if (!Lines.Any())
             {
                 return 0.0;
@@ -107,7 +99,6 @@ namespace P2FixAnAppDotNetCode.Models
                     return cartLine.Product;
                 }
             }
-            // Aucun produit correspondant n'a été trouvé
             return null;
         }
 
