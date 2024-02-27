@@ -1,4 +1,5 @@
 ﻿using P2FixAnAppDotNetCode.Models.Repositories;
+using System.Collections.Generic;
 
 namespace P2FixAnAppDotNetCode.Models.Services
 {
@@ -19,9 +20,9 @@ namespace P2FixAnAppDotNetCode.Models.Services
         /// <summary>
         /// Get all product from the inventory
         /// </summary>
-        public Product[] GetAllProducts()
+        public List<Product> GetAllProducts()
         {
-            return _productRepository.GetAllProducts();
+            return new List<Product>(_productRepository.GetAllProducts());
         }
 
         /// <summary>
@@ -41,15 +42,6 @@ namespace P2FixAnAppDotNetCode.Models.Services
             {
                 _productRepository.UpdateProductStocks(line.Product.Id, line.Quantity);
             }
-        }
-
-        /// <summary>
-        /// Updates a single product in the inventory
-        /// </summary>
-        /// <param name="product">The product to update</param>
-        public void UpdateProduct(Product product)
-        {
-            _productRepository.UpdateProduct(product);
-        }
+        }       
     }
 }

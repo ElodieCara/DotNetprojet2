@@ -1,10 +1,11 @@
-﻿namespace P2FixAnAppDotNetCode.Models.Services
+﻿using System.Collections.Generic;
+
+namespace P2FixAnAppDotNetCode.Models.Services
 {
     public interface IProductService
     {
-        Product[] GetAllProducts();
+        List<Product> GetAllProducts();
         Product GetProductById(int id);
         void UpdateProductQuantities(Cart cart);
-        void UpdateProduct(Product product); 
     }
 }
