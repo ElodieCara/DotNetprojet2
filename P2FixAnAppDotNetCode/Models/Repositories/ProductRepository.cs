@@ -70,7 +70,6 @@ namespace P2FixAnAppDotNetCode.Models.Repositories
         /// <summary>
         /// Updates a product in the inventory
         /// </summary>
-        /// <param name="updatedProduct">Product object with updated information</param>
         public void UpdateProduct(Product updatedProduct)
         {
             var product = _products.FirstOrDefault(p => p.Id == updatedProduct.Id);

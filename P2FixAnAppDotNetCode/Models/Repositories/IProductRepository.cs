@@ -4,10 +4,10 @@
     {
         Product[] GetAllProducts();
 
-        Product GetProductById(int id); // Ajoutez cette méthode 
+        Product GetProductById(int id); 
 
         void UpdateProductStocks(int productId, int quantityToRemove);
 
-        void UpdateProduct(Product product); // Nouvelle méthode pour mettre à jour un produit
+        void UpdateProduct(Product product); 
     }
 }
